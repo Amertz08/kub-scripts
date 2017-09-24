@@ -14,11 +14,13 @@ apt-get install -y \
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 CHECK=$(apt-key fingerprint 0EBFCD88 | grep "Key fingerprint")
+echo ""
 if [[ $CHECK == $KEY ]]; then
     echo "Valid fingerprint"
 else
     echo "Invalid fingerprint"
 fi
+echo ""
 
 add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -34,6 +36,7 @@ if [ ! -f ~/.docker-aliases ]; then
     mv .docker-aliases ~/.docker-aliases
     echo ". ~/.docker-aliases" >> ~/.bashrc
     echo "Aliases installed"
+    su -
 else
     echo "Aliases already exist"
 fi
