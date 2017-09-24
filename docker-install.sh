@@ -19,3 +19,6 @@ if [[ $CHECK == $KEY ]]; then
 else
     echo "Invalid fingerprint"
 fi
+
+apt-get update && apt-get install -y docker-ce
+docker run hello-world # TODO: autocheck this work
