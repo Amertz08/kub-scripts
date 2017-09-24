@@ -11,6 +11,8 @@ apt-get install -y \
     curl \
     software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-if [ $(apt-key fingerprint 0EBFCD88 | grep "Key fingerprint") == "*$KEY*" ]; then
+if [[ $(apt-key fingerprint 0EBFCD88 | grep "Key fingerprint") == *"$KEY"* ]]; then
     echo "Valid fingerprint"
+else
+    echo "Invalid fingerprint"
 fi
