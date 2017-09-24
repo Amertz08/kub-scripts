@@ -28,6 +28,12 @@ add-apt-repository \
 apt-get update && apt-get install -y docker-ce
 docker run hello-world # TODO: autocheck this work
 
-wget https://gist.githubusercontent.com/Amertz08/6e7939162f6e36696704f48691ff098a/raw/8c8a44db091e11fb38863c0878dbb9b028280950/.docker-aliases
-mv .docker-aliases ~/.docker-aliases
-echo ". .docker-aliases" >> ~/.bashrc
+if [ ! -f ~/.docker-aliases ]; then
+    echo "Getting .docker-aliases"
+    wget https://gist.githubusercontent.com/Amertz08/6e7939162f6e36696704f48691ff098a/raw/8c8a44db091e11fb38863c0878dbb9b028280950/.docker-aliases
+    mv .docker-aliases ~/.docker-aliases
+    echo ". ~/.docker-aliases" >> ~/.bashrc
+    echo "Aliases installed"
+else
+    echo "Aliases already exist"
+fi
