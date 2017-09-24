@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+install() {
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
@@ -11,3 +12,24 @@ deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 apt-get update
 apt-get install -y kubelet kubeadm
+}
+
+
+master() {
+kubectl init --pod-network-cidr
+}
+
+
+main() {
+    echo "Installing Kubernetes"
+    install
+
+    echo "Is this a master node [y/n]?"
+    read master
+
+    if [ master == "y" ]; then
+        master
+    fi
+}
+
+main
